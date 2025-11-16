@@ -70,6 +70,9 @@ table.items th {
   padding: 4px;
 }
 
+table.items td > span, table.items td .item {
+  display: block;
+}
 table.items td {
   background-color: var(--grist-theme-page-panels-main-panel-bg, white);
   padding: 4px;
