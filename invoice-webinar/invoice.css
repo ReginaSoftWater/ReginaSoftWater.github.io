@@ -159,7 +159,7 @@ div.summary::after {
 
 .thanks {
   text-align: right;
-  color: #C83200;
+  color: #34A56F;
   font-size: 200%;
 }
 
@@ -174,7 +174,7 @@ div.paid {
   rotate: 15deg;
   font-size: 80px;
   top: 20px;
-  border: 5px solid red;
+  border: 5px solid green;
   float: left;
   font-weight: bolder;
 }
