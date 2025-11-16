@@ -6,7 +6,7 @@ body {
 }
 
 .meta {
-  color: #12E193;
+  color: #1F45FC;
 }
 
 .header .title {
@@ -40,7 +40,7 @@ body {
   padding: 1px;
   margin-top: 1em;
   margin-bottom: 1em;
-  background: #ff8000;
+  background: #1F45FC;
   -webkit-print-color-adjust: exact !important;
   color-adjust: exact !important;
 }
@@ -58,7 +58,7 @@ body {
 
 table.items {
   width: 100%;
-  border: 1px solid #ff8000;
+  border: 1px solid #1F45FC;
   border-collapse: collapse;
 }
 
@@ -123,7 +123,7 @@ div.summary .part {
 div.summary .total {
   display: block;
   flex-grow: 1;
-  background: #000080;
+  background: #FCD71E;
   font-size: 140%;
 }
 
@@ -170,7 +170,7 @@ div.instructions, .newlined, p.note {
 div.paid {
   position: relative;
   left: 40%;
-  color: red;
+  color: green;
   rotate: 15deg;
   font-size: 80px;
   top: 20px;
