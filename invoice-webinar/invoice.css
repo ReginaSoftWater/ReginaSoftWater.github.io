@@ -1,5 +1,5 @@
 body {
-  font-family: Sans-Serif;
+  font-family: 'Rubik';
   max-width: 800px;
   margin: 0 auto;
   padding: 5px;
@@ -81,7 +81,7 @@ table.items td {
 }
 
 .money, .number {
-  text-align: right;
+  text-align: left;
 }
 
 .name {
