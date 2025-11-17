@@ -310,3 +310,11 @@ div.column-name {
   border-radius: 0.25em;
 }
 
+.logo img {
+  max-width: 120px;   /* ← change this number for size */
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
