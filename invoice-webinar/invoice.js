@@ -34,7 +34,7 @@ function updateInvoice(row) {
   try {
     if (!row) throw new Error("No row selected");
 
-    // Pull from the Items column
+    // Pull from the Items column in the table
     let items = [];
     if (row.Items && Array.isArray(row.Items)) {
       items = row.Items.map(i => ({
@@ -43,15 +43,12 @@ function updateInvoice(row) {
       }));
     }
 
-    // Compute subtotal and total if missing
+    // Compute subtotal and total
     const subtotal = items.reduce((sum, i) => sum + (i.Total || 0), 0);
     row.Subtotal = subtotal;
     row.Total = subtotal + (row.Taxes || 0) - (row.Deduction || 0);
 
-    // Assign cleaned items back
     row.Items = items;
-
-    // Assign to Vue
     data.invoice = Object.assign({}, row);
     window.invoice = row;
 
@@ -66,7 +63,6 @@ ready(() => {
 
   app = new Vue({ el: '#app', data });
 
-  // Demo mode
   if (document.location.search.includes('demo') && typeof exampleData !== 'undefined') {
     updateInvoice(exampleData);
   }
