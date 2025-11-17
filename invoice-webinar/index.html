@@ -30,20 +30,26 @@
             <li><a class="button" href="index.html?demo=1">A filled out invoice</a></li>
             <li><a class="button" href="index.html?labels=1">A labelled invoice</a></li>
           </ul>
-        </template>
-        <template v-else>
-          {{ status }}
-        </template>
-      </div>
-      <template v-if="invoice">
-        <div class="top">
-          <div class="logo">
-            <img src="Regina Softener Services Logo_A[3352].jpg">
-          </div>
-          <div class="block">
-            <div class="header">
-              <div class="meta title">Invoice</div>
-            </div>
+       </template>
+<template v-else>
+  {{ status }}
+</template>
+</div>
+
+<template v-if="invoice">
+  <div class="top">
+    <div class="logo">
+      <img 
+        src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg"
+        alt="Regina Softener Services Logo"
+      >
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="header">
+      <div class="meta title">Invoice</div>
+    </div>
             <div class="info"><span class="meta">Invoice Number</span> #{{ invoice.Number }}</div>
             <div class="info" v-if="invoice.Issued"><div class="meta date-tag">Issued</div> {{ invoice.Issued | asDate }}</div>
             <div class="info" v-if="invoice.Due"><div class="meta date-tag">Due</div> {{ invoice.Due | asDate }}</div>
