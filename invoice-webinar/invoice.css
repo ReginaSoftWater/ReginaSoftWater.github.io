@@ -41,7 +41,9 @@ body {
   font-size: 2em;
   font-weight: bold;
   margin: 0;
+  text-align: left; /* ← Align the title to the left */
 }
+
 
 .header-meta .meta {
   color: #1F45FC;
