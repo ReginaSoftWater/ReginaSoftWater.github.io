@@ -14,13 +14,9 @@ body {
 /* ---------------- Header Section ---------------- */
 .header {
   display: flex;
-  align-items: center;            /* vertically center everything */
-  justify-content: space-between;  /* logo left, header-meta center-ish, supplier right */
+  align-items: flex-start;       /* logo, invoice, supplier top-aligned */
+  justify-content: space-between; 
   padding: 10px 20px;
-}
-
-.logo {
-  flex: 0 0 auto;
 }
 
 .logo img {
@@ -30,24 +26,29 @@ body {
 }
 
 .header-meta {
-  flex: 0 0 auto;               /* keep size to content */
+  flex: 1 1 auto;               /* takes remaining space between logo and supplier */
   display: flex;
   flex-direction: column;
-  text-align: left;              /* align whole box to the left */
+  text-align: left;
+  font-family: 'Rubik', sans-serif;
 }
 
 .header-meta .title {
   font-size: 2em;
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 5px;
+}
+
+.header-meta .info {
+  font-size: 0.9em;
+  color: #1F45FC;
+  margin: 2px 0;
 }
 
 .header-meta .meta {
-  text-align: right;            /* invoice details stay right-aligned */
-  color: #1F45FC;
+  font-weight: bold;
   text-transform: uppercase;
-  margin: 2px 0 0 0;
-  font-size: 0.9em;
+  margin-right: 5px;
 }
 
 .supplier {
