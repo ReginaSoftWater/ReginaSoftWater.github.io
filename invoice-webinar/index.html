@@ -124,6 +124,8 @@
             <tr v-for="item in invoice.Items">
               <td>{{ item.Description }}</td>
               <td class="money">{{ item.Total | currency }}</td>
+             <td class="money">{{ item.Price | currency }}</td>
+              <td class="number">{{ item.Quantity }}</td>
             </tr>
           </template>
         </table>
