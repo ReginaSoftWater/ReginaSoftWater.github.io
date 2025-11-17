@@ -1,3 +1,4 @@
+/* ---------------- General Page ---------------- */
 body {
   font-family: 'Rubik';
   max-width: 800px;
@@ -5,19 +6,56 @@ body {
   padding: 5px;
 }
 
+/* Meta styling */
 .meta {
   color: #1F45FC;
+}
+
+/* ---------------- Header Section ---------------- */
+.header {
+  display: flex;
+  align-items: center;       /* vertically center everything */
+  justify-content: flex-start; /* start from the left */
+  padding: 10px 20px;
+  position: relative;
+}
+
+.logo {
+  flex: 0 0 auto;            /* logo takes only its own width */
+}
+
+.logo img {
+  max-width: 140px;          /* adjust logo size */
+  height: auto;
+  display: block;
+}
+
+.header-meta {
+  flex: 0 0 auto;            /* meta block takes its content width */
+  display: flex;
+  flex-direction: column;
+  text-align: right;          /* right-align text inside meta block */
+  margin-left: 60px;          /* shift slightly left of center */
 }
 
 .header .title {
   font-size: 300%;
   font-weight: bold;
+  margin: 0;
 }
 
 .header .meta {
+  color: #1F45FC;
   text-transform: uppercase;
+  margin: 0;
 }
 
+.header-right {
+  flex: 1;                    /* fills remaining space to the right */
+  text-align: right;
+}
+
+/* ---------------- Info Sections ---------------- */
 .info .meta {
   text-transform: uppercase;
 }
@@ -37,6 +75,7 @@ body {
   flex: auto;
 }
 
+/* ---------------- Client, Items, Summary ---------------- */
 .client, .items, .summary {
   padding: 1px;
   margin-top: 1em;
@@ -74,6 +113,7 @@ table.items th {
 table.items td > span, table.items td .item {
   display: block;
 }
+
 table.items td {
   background-color: var(--grist-theme-page-panels-main-panel-bg, white);
   padding: 4px;
@@ -101,12 +141,12 @@ div.date-tag {
   min-width: 80px;
 }
 
+/* ---------------- Layout ---------------- */
 div.top {
   display: flex;
   width: 100%;
   padding: 0px;
-  justify-content: space-between;
-  justify-content: start
+  justify-content: start;
 }
 
 div.summary {
@@ -152,6 +192,7 @@ div.summary::after {
   clear: both;
 }
 
+/* ---------------- Icons ---------------- */
 .phone::before {
   content: "\260e";
   margin-right: 0.5em;
@@ -162,16 +203,19 @@ div.summary::after {
   margin-right: 0.5em;  
 }
 
+/* ---------------- Thanks ---------------- */
 .thanks {
   text-align: right;
   color: #34A56F;
   font-size: 200%;
 }
 
+/* ---------------- Notes / Instructions ---------------- */
 div.instructions, .newlined, p.note {
   white-space: pre-line;
 }
 
+/* ---------------- Paid Stamp ---------------- */
 div.paid {
   position: relative;
   left: 40%;
@@ -184,10 +228,12 @@ div.paid {
   font-weight: bolder;
 }
 
+/* ---------------- App Container ---------------- */
 .app {
   position: relative;
 }
 
+/* ---------------- Print ---------------- */
 @media print {
   div.print {
     display: none;
@@ -206,9 +252,7 @@ div.print a {
   font-size: 200%;
   color: white;
   text-decoration: none;
-  padding: 0.25em;
-  padding-top: 0.5em;
-  padding-right: 0.5em;
+  padding: 0.25em 0.5em 0.5em 0.25em;
   border-top-right-radius: 0.5em;
   text-transform: uppercase;
 }
@@ -217,6 +261,7 @@ div.print a:hover {
   background: #4682B4;
 }
 
+/* ---------------- Status / Buttons ---------------- */
 .done {
   text-decoration: line-through;
 }
@@ -260,14 +305,11 @@ div.column-name {
 
 .help table {
   border: none;
+  padding-bottom: 3px;
 }
 
 .help td.key {
   text-align: right;
-}
-
-.help table {
-  padding-bottom: 3px;
 }
 
 .help-close {
@@ -303,27 +345,9 @@ div.column-name {
   text-decoration: none;
   color: #000080;
   background: #ddd;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding: 1px 0.5em;
   margin-top: 1px;
   margin-bottom: 1px;
   border-radius: 0.25em;
 }
 
-.logo {
-  position: relative; /* parent relative for absolute child */
-  width: 150px; /* optional, ensures container is wide enough */
-  height: auto;
-}
-
-.logo img {
-  max-width: 140px;
-  height: auto;
-  display: block;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10;
-}
