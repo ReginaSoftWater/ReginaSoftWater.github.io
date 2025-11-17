@@ -10,9 +10,9 @@
   <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 
   <!-- Invoice scripts and styles -->
-  <script src="invoice.js?ver=11"></script>
+  <script src="invoice.js?ver=12"></script>
   <script src="exampleData.js"></script>
-  <link rel="stylesheet" href="invoice.css?ver=17">
+  <link rel="stylesheet" href="invoice.css?ver=18">
 </head>
 
 <body>
@@ -23,9 +23,9 @@
     <template v-if="status === 'waiting'">
       <p>Waiting for data...</p>
       <ul>
-        <li v-bind:class="[tableConnected ? 'done' : '']">I need <b>read table</b> access.</li>
-        <li v-bind:class="[haveRows ? 'done' : '']">I need at least one row of data.</li>
-        <li v-bind:class="[rowConnected ? 'done' : '']">I need <b>Select By</b> set.</li>
+        <li :class="{ done: tableConnected }">I need <b>read table</b> access.</li>
+        <li :class="{ done: haveRows }">I need at least one row of data.</li>
+        <li :class="{ done: rowConnected }">I need <b>Select By</b> set.</li>
       </ul>
     </template>
     <template v-else>{{ status }}</template>
@@ -33,17 +33,16 @@
 
   <!-- Invoice -->
   <template v-if="invoice">
-    <!-- Header: Logo on left, Invoice Info in center-left, Supplier on right -->
-    <div class="header" style="display: flex; justify-content: space-between; align-items: flex-start;">
-      
+    <!-- Header -->
+    <div class="header">
       <!-- Logo -->
       <div class="logo">
-        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg"
-             alt="Regina Softener Services Logo" style="max-width: 140px; height: auto;">
+        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" 
+             alt="Regina Softener Services Logo">
       </div>
 
       <!-- Invoice Info -->
-      <div class="header-meta" style="margin-left: 20px;">
+      <div class="header-meta">
         <div class="title">Invoice</div>
         <div class="meta">Invoice Number: #{{ invoice.Number }}</div>
         <div v-if="invoice.Issued" class="meta date-tag">Issued: {{ invoice.Issued | asDate }}</div>
@@ -51,9 +50,9 @@
       </div>
 
       <!-- Supplier Info -->
-      <div class="supplier" style="text-align: right;">
-        <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
-          <template v-if="typeof(business) === 'string'">
+      <div class="supplier">
+        <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])" :key="business.Name">
+          <template v-if="typeof business === 'string'">
             <div class="address newlined">{{ business }}</div>
           </template>
           <template v-else>
@@ -64,19 +63,21 @@
               {{ business.City }} {{ business.State }} {{ business.Zip }}<br />
               <template v-if="business.Country">{{ business.Country }}<br /></template>
             </div>
-            <template v-if="business.Email"><div class="email">{{ business.Email }}</div></template>
-            <template v-if="business.Phone"><div class="phone">{{ business.Phone }}</div></template>
-            <template v-if="business.Website"><div class="website"><a v-bind:href="business.Url">{{ business.Website }}</a></div></template>
+            <div v-if="business.Email" class="email">{{ business.Email }}</div>
+            <div v-if="business.Phone" class="phone">{{ business.Phone }}</div>
+            <div v-if="business.Website" class="website">
+              <a :href="business.Url">{{ business.Website }}</a>
+            </div>
           </template>
         </div>
       </div>
     </div>
 
     <!-- Client Info -->
-    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])" style="margin-top: 20px;">
+    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])" :key="business.Name">
       <div class="title">Client</div>
       <div class="details">
-        <template v-if="typeof(business) === 'string'">
+        <template v-if="typeof business === 'string'">
           <div class="newlined">{{ business }}</div>
         </template>
         <template v-else>
@@ -90,7 +91,7 @@
     </div>
 
     <!-- Items Table -->
-    <table class="items" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <table class="items">
       <thead>
         <tr>
           <th>Description</th>
@@ -109,7 +110,7 @@
     </table>
 
     <!-- Summary -->
-    <div class="summary" style="display: flex; justify-content: flex-end; margin-top: 20px;">
+    <div class="summary">
       <div class="part">
         <div class="title">Subtotal</div>
         <div class="details">{{ invoice.Subtotal | currency }}</div>
@@ -129,22 +130,18 @@
     </div>
 
     <!-- Notes -->
-    <template v-if="invoice.Note">
-      <p class="note" style="margin-top: 20px;">{{ invoice.Note }}</p>
-    </template>
+    <p v-if="invoice.Note" class="note">{{ invoice.Note }}</p>
 
     <!-- Paid Stamp -->
-    <template v-if="invoice.Paid">
-      <div class="paid">PAID</div>
-    </template>
+    <div v-if="invoice.Paid" class="paid">PAID</div>
 
     <!-- Footer -->
-    <div class="footer" style="margin-top: 40px;">
+    <div class="footer">
       <div class="thanks">Thank you!</div>
     </div>
 
     <!-- Print Button -->
-    <div class="print" style="margin-top: 20px;">
+    <div class="print">
       <a href="javascript:window.print()">Print</a>
     </div>
   </template>
