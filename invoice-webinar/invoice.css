@@ -43,7 +43,7 @@ body {
 }
 
 .header-meta .meta {
-  text-align: left;            /* invoice details stay left-aligned */
+  text-align: right;            /* invoice details stay right-aligned */
   color: #1F45FC;
   text-transform: uppercase;
   margin: 2px 0 0 0;
