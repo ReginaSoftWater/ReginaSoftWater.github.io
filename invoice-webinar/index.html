@@ -4,15 +4,16 @@
   <meta charset="utf-8">
   <title>Grist Invoice</title>
 
-  <!-- Vue.js, Moment.js, and Grist Plugin API -->
+  <!-- Vue.js and Grist Plugin API -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 
-  <!-- Invoice script & style -->
+  <!-- Invoice scripts and styles -->
   <script src="invoice.js"></script>
   <link rel="stylesheet" href="invoice.css">
 </head>
+
 <body>
 <div id="app">
 
@@ -31,13 +32,13 @@
 
   <!-- Invoice -->
   <template v-if="invoice">
+    <!-- Header: Logo, Invoice Info, Supplier -->
     <div class="header">
-      <!-- Logo -->
       <div class="logo">
-        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" alt="Logo">
+        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg"
+             alt="Regina Softener Services Logo">
       </div>
 
-      <!-- Invoice Info -->
       <div class="header-meta">
         <div class="title">Invoice</div>
         <div class="meta">Invoice Number: #{{ invoice.Number }}</div>
@@ -45,17 +46,17 @@
         <div v-if="invoice.Due" class="meta date-tag">Due: {{ invoice.Due | asDate }}</div>
       </div>
 
-      <!-- Supplier Info -->
       <div class="supplier">
         <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
           <div class="address">
-            <span class="name">{{ business.Name }}</span><br/>
-            {{ business.Street1 }}<br/>
-            <template v-if="business.Street2">{{ business.Street2 }}<br/></template>
-            {{ business.City }} {{ business.State }} {{ business.Zip }}<br/>
+            <span class="name">{{ business.Name }}</span><br />
+            {{ business.Street1 }}<br />
+            <template v-if="business.Street2">{{ business.Street2 }}<br /></template>
+            {{ business.City }} {{ business.State }} {{ business.Zip }}<br />
           </div>
           <template v-if="business.Email"><div class="email">{{ business.Email }}</div></template>
           <template v-if="business.Phone"><div class="phone">{{ business.Phone }}</div></template>
+          <template v-if="business.Website"><div class="website"><a v-bind:href="business.Url">{{ business.Website }}</a></div></template>
         </div>
       </div>
     </div>
@@ -125,7 +126,7 @@
       <div class="thanks">Thank you!</div>
     </div>
 
-    <!-- Print -->
+    <!-- Print Button -->
     <div class="print">
       <a href="javascript:window.print()">Print</a>
     </div>
