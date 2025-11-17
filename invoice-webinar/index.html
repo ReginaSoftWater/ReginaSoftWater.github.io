@@ -4,17 +4,15 @@
   <meta charset="utf-8">
   <title>Grist Invoice</title>
 
-  <!-- Vue.js and Grist Plugin API -->
+  <!-- Vue.js, Moment.js, and Grist Plugin API -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 
-  <!-- Invoice scripts and styles -->
-  <script src="invoice.js?ver=12"></script>
-  <script src="exampleData.js"></script>
-  <link rel="stylesheet" href="invoice.css?ver=18">
+  <!-- Invoice script & style -->
+  <script src="invoice.js"></script>
+  <link rel="stylesheet" href="invoice.css">
 </head>
-
 <body>
 <div id="app">
 
@@ -23,9 +21,9 @@
     <template v-if="status === 'waiting'">
       <p>Waiting for data...</p>
       <ul>
-        <li :class="{ done: tableConnected }">I need <b>read table</b> access.</li>
-        <li :class="{ done: haveRows }">I need at least one row of data.</li>
-        <li :class="{ done: rowConnected }">I need <b>Select By</b> set.</li>
+        <li v-bind:class="[tableConnected ? 'done' : '']">I need <b>read table</b> access.</li>
+        <li v-bind:class="[haveRows ? 'done' : '']">I need at least one row of data.</li>
+        <li v-bind:class="[rowConnected ? 'done' : '']">I need <b>Select By</b> set.</li>
       </ul>
     </template>
     <template v-else>{{ status }}</template>
@@ -33,12 +31,10 @@
 
   <!-- Invoice -->
   <template v-if="invoice">
-    <!-- Header -->
     <div class="header">
       <!-- Logo -->
       <div class="logo">
-        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" 
-             alt="Regina Softener Services Logo">
+        <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" alt="Logo">
       </div>
 
       <!-- Invoice Info -->
@@ -51,42 +47,27 @@
 
       <!-- Supplier Info -->
       <div class="supplier">
-        <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])" :key="business.Name">
-          <template v-if="typeof business === 'string'">
-            <div class="address newlined">{{ business }}</div>
-          </template>
-          <template v-else>
-            <div class="address">
-              <span class="name">{{ business.Name }}</span><br />
-              {{ business.Street1 }}<br />
-              <template v-if="business.Street2">{{ business.Street2 }}<br /></template>
-              {{ business.City }} {{ business.State }} {{ business.Zip }}<br />
-              <template v-if="business.Country">{{ business.Country }}<br /></template>
-            </div>
-            <div v-if="business.Email" class="email">{{ business.Email }}</div>
-            <div v-if="business.Phone" class="phone">{{ business.Phone }}</div>
-            <div v-if="business.Website" class="website">
-              <a :href="business.Url">{{ business.Website }}</a>
-            </div>
-          </template>
+        <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
+          <div class="address">
+            <span class="name">{{ business.Name }}</span><br/>
+            {{ business.Street1 }}<br/>
+            <template v-if="business.Street2">{{ business.Street2 }}<br/></template>
+            {{ business.City }} {{ business.State }} {{ business.Zip }}<br/>
+          </div>
+          <template v-if="business.Email"><div class="email">{{ business.Email }}</div></template>
+          <template v-if="business.Phone"><div class="phone">{{ business.Phone }}</div></template>
         </div>
       </div>
     </div>
 
     <!-- Client Info -->
-    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])" :key="business.Name">
+    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])">
       <div class="title">Client</div>
       <div class="details">
-        <template v-if="typeof business === 'string'">
-          <div class="newlined">{{ business }}</div>
-        </template>
-        <template v-else>
-          <div>{{ business.Name }}</div>
-          <template v-if="business.Street1">{{ business.Street1 }},</template>
-          <template v-if="business.Street2">{{ business.Street2 }},</template>
-          {{ business.City }} {{ business.State }} {{ business.Zip }}
-          <template v-if="business.Country"><br />{{ business.Country }}</template>
-        </template>
+        <div>{{ business.Name }}</div>
+        <template v-if="business.Street1">{{ business.Street1 }},</template>
+        <template v-if="business.Street2">{{ business.Street2 }},</template>
+        {{ business.City }} {{ business.State }} {{ business.Zip }}
       </div>
     </div>
 
@@ -130,17 +111,21 @@
     </div>
 
     <!-- Notes -->
-    <p v-if="invoice.Note" class="note">{{ invoice.Note }}</p>
+    <template v-if="invoice.Note">
+      <p class="note">{{ invoice.Note }}</p>
+    </template>
 
     <!-- Paid Stamp -->
-    <div v-if="invoice.Paid" class="paid">PAID</div>
+    <template v-if="invoice.Paid">
+      <div class="paid">PAID</div>
+    </template>
 
     <!-- Footer -->
     <div class="footer">
       <div class="thanks">Thank you!</div>
     </div>
 
-    <!-- Print Button -->
+    <!-- Print -->
     <div class="print">
       <a href="javascript:window.print()">Print</a>
     </div>
