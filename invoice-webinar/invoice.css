@@ -312,11 +312,18 @@ div.column-name {
   border-radius: 0.25em;
 }
 
+.logo {
+  position: relative; /* parent relative for absolute child */
+  width: 150px; /* optional, ensures container is wide enough */
+  height: auto;
+}
+
 .logo img {
-  max-width: 140px;   /* ← change this number for size */
+  max-width: 140px;
   height: auto;
   display: block;
   position: absolute;
   top: 10px;
   left: 10px;
+  z-index: 10;
 }
