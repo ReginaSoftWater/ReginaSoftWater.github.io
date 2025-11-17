@@ -142,7 +142,10 @@ function updateInvoice(row) {
     if (row === null) {
       throw new Error("(No data - not on row - please add or select a row)");
     }
+    
     console.log("GOT...", JSON.stringify(row));
+
+    // Merge References if present
     if (row.References) {
       try {
         Object.assign(row, row.References);
@@ -150,6 +153,33 @@ function updateInvoice(row) {
         throw new Error('Could not understand References column. ' + err);
       }
     }
+
+    // -------------------------------
+    // Transform Items / Yearly_Rental_Dues
+    // -------------------------------
+    // Only Description and Total, no Quantity or Unit Price
+    let items = [];
+
+    if (row.Yearly_Rental_Dues && row.Yearly_Rental_Dues.length) {
+      items = row.Yearly_Rental_Dues.map(d => ({
+        Description: `${d.Service} - ${d.Total_After_Tax}`,
+        Total: d.Total_After_Tax
+      }));
+    }
+
+    // Assign to row.Items so your template can v-for over it
+    row.Items = items;
+
+    // Set the invoice in your data object (Vue will react)
+    data.invoice = row;
+
+  } catch (err) {
+    console.error(err);
+    data.status = err.message || 'Error updating invoice';
+    data.invoice = null;
+  }
+}
+
 
     // Add some guidance about columns.
     const want = new Set(Object.keys(addDemo({})));
