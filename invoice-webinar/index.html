@@ -90,19 +90,16 @@
 
     <!-- Items Table -->
     <table class="items">
-      <tr>
-        <th>Description</th>
-        <th class="money">Unit Price</th>
-        <th class="number">Quantity</th>
-        <th class="money">Total</th>
-      </tr>
-      <tr v-for="item in invoice.Items">
-        <td>{{ item.Description }}</td>
-        <td class="money">{{ item.Cost | currency }}</td>
-        <td class="number">{{ item.Quantity }}</td>
-        <td class="money">{{ item.Total | currency }}</td>
-      </tr>
-    </table>
+  <tr>
+    <th>Description</th>
+    <th class="money">Total</th>
+  </tr>
+  <tr v-for="item in invoice.Items">
+    <td>{{ item.Description }}</td>
+    <td class="money">{{ item.Total | currency }}</td>
+  </tr>
+</table>
+
 
     <!-- Summary -->
     <div class="summary">
