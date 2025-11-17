@@ -33,16 +33,17 @@
 
   <!-- Invoice -->
   <template v-if="invoice">
-    <!-- Header: Logo, Invoice Info, Supplier -->
-    <div class="header">
+    <!-- Header: Logo on left, Invoice Info in center-left, Supplier on right -->
+    <div class="header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+      
       <!-- Logo -->
       <div class="logo">
         <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg"
-             alt="Regina Softener Services Logo">
+             alt="Regina Softener Services Logo" style="max-width: 140px; height: auto;">
       </div>
 
       <!-- Invoice Info -->
-      <div class="header-meta">
+      <div class="header-meta" style="margin-left: 20px;">
         <div class="title">Invoice</div>
         <div class="meta">Invoice Number: #{{ invoice.Number }}</div>
         <div v-if="invoice.Issued" class="meta date-tag">Issued: {{ invoice.Issued | asDate }}</div>
@@ -50,7 +51,7 @@
       </div>
 
       <!-- Supplier Info -->
-      <div class="supplier">
+      <div class="supplier" style="text-align: right;">
         <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
           <template v-if="typeof(business) === 'string'">
             <div class="address newlined">{{ business }}</div>
@@ -72,7 +73,7 @@
     </div>
 
     <!-- Client Info -->
-    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])">
+    <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])" style="margin-top: 20px;">
       <div class="title">Client</div>
       <div class="details">
         <template v-if="typeof(business) === 'string'">
@@ -89,20 +90,26 @@
     </div>
 
     <!-- Items Table -->
-    <table class="items">
-  <tr>
-    <th>Description</th>
-    <th class="money">Total</th>
-  </tr>
-  <tr v-for="item in invoice.Items">
-    <td>{{ item.Description }}</td>
-    <td class="money">{{ item.Total | currency }}</td>
-  </tr>
-</table>
-
+    <table class="items" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class="money">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in invoice.Items" :key="item.Description">
+          <td>{{ item.Description }}</td>
+          <td class="money">{{ item.Total | currency }}</td>
+        </tr>
+        <tr v-if="!invoice.Items || invoice.Items.length === 0">
+          <td colspan="2">No items to display</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Summary -->
-    <div class="summary">
+    <div class="summary" style="display: flex; justify-content: flex-end; margin-top: 20px;">
       <div class="part">
         <div class="title">Subtotal</div>
         <div class="details">{{ invoice.Subtotal | currency }}</div>
@@ -123,7 +130,7 @@
 
     <!-- Notes -->
     <template v-if="invoice.Note">
-      <p class="note">{{ invoice.Note }}</p>
+      <p class="note" style="margin-top: 20px;">{{ invoice.Note }}</p>
     </template>
 
     <!-- Paid Stamp -->
@@ -132,12 +139,12 @@
     </template>
 
     <!-- Footer -->
-    <div class="footer">
+    <div class="footer" style="margin-top: 40px;">
       <div class="thanks">Thank you!</div>
     </div>
 
     <!-- Print Button -->
-    <div class="print">
+    <div class="print" style="margin-top: 20px;">
       <a href="javascript:window.print()">Print</a>
     </div>
   </template>
