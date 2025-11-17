@@ -94,13 +94,37 @@ function updateInvoice(row) {
     data.status = '';
     if (!row) throw new Error("(No data - not on row - please add or select a row)");
 
-    console.log("GOT...", JSON.stringify(row));
-
     // Merge References if present
     if (row.References) {
-      try { Object.assign(row, row.References); }
-      catch (err) { throw new Error('Could not understand References column. ' + err); }
+      try {
+        Object.assign(row, row.References);
+      } catch (err) {
+        throw new Error('Could not understand References column. ' + err);
+      }
     }
+
+    // -------------------------------
+    // Use Items column directly for table
+    // -------------------------------
+    if (row.Items && Array.isArray(row.Items)) {
+      // Map to only Description + Total
+      row.Items = row.Items.map(item => ({
+        Description: item.Description || '—',
+        Total: item.Total || item.Cost || '—'   // fallback if you have Total or Cost
+      }));
+    } else {
+      row.Items = [];
+    }
+
+    // Assign to Vue data
+    data.invoice = row;
+
+  } catch (err) {
+    console.error(err);
+    data.status = err.message || 'Error updating invoice';
+    data.invoice = null;
+  }
+}
 
     // -------------------------------
     // Transform Yearly_Rental_Dues into simple Items
