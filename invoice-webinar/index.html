@@ -38,52 +38,54 @@
     <!-- Invoice -->
     <template v-if="invoice">
 
-      <!-- Header: Logo | Invoice Info | Supplier -->
-      <div class="top">
-        <div class="header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+   <!-- Header: Logo | Invoice Info | Supplier -->
+<div class="top">
+  <div class="header">
 
-          <!-- Logo Left -->
-          <div class="logo" style="flex: 0 0 auto;">
-            <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" alt="Company Logo">
-          </div>
+    <!-- Logo Left -->
+    <div class="logo">
+      <img src="https://github.com/ReginaSoftWater/ReginaSoftWater.github.io/raw/main/Regina%20Softener%20Services%20Logo_A%5B3352%5D.jpg" 
+           alt="Company Logo">
+    </div>
 
-          <!-- Invoice Info Center -->
-          <div class="header-meta" style="flex: 1 1 auto; text-align: center;">
-            <div class="title" style="font-size: 2em; font-weight: bold;">Invoice</div>
-            <div class="meta info" style="margin-top: 5px;">
-              <span class="meta">Invoice Number</span> #{{ invoice.Number }}
-            </div>
-            <div class="info" v-if="invoice.Issued">
-              <div class="meta date-tag">Issued</div> {{ invoice.Issued | asDate }}
-            </div>
-            <div class="info" v-if="invoice.Due">
-              <div class="meta date-tag">Due</div> {{ invoice.Due | asDate }}
-            </div>
-          </div>
-
-          <!-- Supplier Info Right -->
-          <div class="supplier" style="flex: 0 0 auto; text-align: right; font-size: 0.9em;">
-            <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
-              <template v-if="typeof(business) === 'string'">
-                <div class="address newlined">{{ business }}</div>
-              </template>
-              <template v-else>
-                <div class="address">
-                  <span class="name">{{ business.Name }}</span><br />
-                  {{ business.Street1 }}<br />
-                  <template v-if="business.Street2">{{ business.Street2 }}<br /></template>
-                  {{ business.City }} {{ business.State }} {{ business.Zip }}<br />
-                  <template v-if="business.Country">{{ business.Country }}<br /></template>
-                </div>
-                <template v-if="business.Email"><div class="email">{{ business.Email }}</div></template>
-                <template v-if="business.Phone"><div class="phone">{{ business.Phone }}</div></template>
-                <template v-if="business.Website"><div class="website"><a v-bind:href="business.Url">{{ business.Website }}</a></div></template>
-              </template>
-            </div>
-          </div>
-
-        </div>
+    <!-- Invoice Info Center -->
+    <div class="header-meta">
+      <div class="title">Invoice</div>
+      <div class="info">
+        <span class="meta">Invoice</span> #{{ invoice.Number }}
       </div>
+      <div class="info" v-if="invoice.Issued">
+        <span class="meta date-tag">Issued</span> {{ invoice.Issued | asDate }}
+      </div>
+      <div class="info" v-if="invoice.Due">
+        <span class="meta date-tag">Due</span> {{ invoice.Due | asDate }}
+      </div>
+    </div>
+
+    <!-- Supplier Info Right -->
+    <div class="supplier">
+      <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
+        <template v-if="typeof(business) === 'string'">
+          <div class="address newlined">{{ business }}</div>
+        </template>
+        <template v-else>
+          <div class="address">
+            <span class="name">{{ business.Name }}</span><br />
+            {{ business.Street1 }}<br />
+            <template v-if="business.Street2">{{ business.Street2 }}<br /></template>
+            {{ business.City }} {{ business.State }} {{ business.Zip }}<br />
+            <template v-if="business.Country">{{ business.Country }}<br /></template>
+          </div>
+          <template v-if="business.Email"><div class="email">{{ business.Email }}</div></template>
+          <template v-if="business.Phone"><div class="phone">{{ business.Phone }}</div></template>
+          <template v-if="business.Website"><div class="website"><a v-bind:href="business.Url">{{ business.Website }}</a></div></template>
+        </template>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
       <!-- Client Info -->
       <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])" style="margin-top: 20px;">
