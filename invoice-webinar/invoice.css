@@ -30,22 +30,20 @@ body {
 }
 
 .header-meta {
-  flex: 0 0 auto;
+  flex: 0 0 auto;               /* keep size to content */
   display: flex;
   flex-direction: column;
-  text-align: right;
-  margin-left: 40px;             /* shift slightly left of center */
+  text-align: left;              /* align whole box to the left */
 }
 
 .header-meta .title {
   font-size: 2em;
   font-weight: bold;
   margin: 0;
-  text-align: left; /* ← Align the title to the left */
 }
 
-
 .header-meta .meta {
+  text-align: right;            /* invoice details stay right-aligned */
   color: #1F45FC;
   text-transform: uppercase;
   margin: 2px 0 0 0;
