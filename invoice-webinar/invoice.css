@@ -14,13 +14,13 @@ body {
 /* ---------------- Header Section ---------------- */
 .header {
   display: flex;
-  align-items: center;        /* vertically center everything */
-  justify-content: space-between; /* space between left, center, right */
+  align-items: center;            /* vertically center everything */
+  justify-content: space-between;  /* logo left, header-meta center-ish, supplier right */
   padding: 10px 20px;
 }
 
 .logo {
-  flex: 0 0 auto;            /* logo takes only its own width */
+  flex: 0 0 auto;
 }
 
 .logo img {
@@ -30,28 +30,30 @@ body {
 }
 
 .header-meta {
-  flex: 0 0 auto;            /* meta block takes only the space it needs */
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  text-align: right;          /* align text right inside meta */
-  margin-left: 40px;          /* shift slightly left of center */
+  text-align: right;
+  margin-left: 40px;             /* shift slightly left of center */
 }
 
-.header .title {
-  font-size: 300%;
+.header-meta .title {
+  font-size: 2em;
   font-weight: bold;
   margin: 0;
 }
 
-.header .meta {
+.header-meta .meta {
   color: #1F45FC;
   text-transform: uppercase;
-  margin: 0;
+  margin: 2px 0 0 0;
+  font-size: 0.9em;
 }
 
 .supplier {
-  flex: 0 0 auto;            /* supplier takes only its content width */
-  text-align: right;          /* align text to right */
+  flex: 0 0 auto;
+  text-align: right;
+  font-size: 0.9em;
 }
 
 
