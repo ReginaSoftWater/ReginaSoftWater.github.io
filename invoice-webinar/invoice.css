@@ -14,10 +14,9 @@ body {
 /* ---------------- Header Section ---------------- */
 .header {
   display: flex;
-  align-items: center;       /* vertically center everything */
-  justify-content: flex-start; /* start from the left */
+  align-items: center;        /* vertically center everything */
+  justify-content: space-between; /* space between left, center, right */
   padding: 10px 20px;
-  position: relative;
 }
 
 .logo {
@@ -25,17 +24,17 @@ body {
 }
 
 .logo img {
-  max-width: 140px;          /* adjust logo size */
+  max-width: 140px;
   height: auto;
   display: block;
 }
 
 .header-meta {
-  flex: 0 0 auto;            /* meta block takes its content width */
+  flex: 0 0 auto;            /* meta block takes only the space it needs */
   display: flex;
   flex-direction: column;
-  text-align: right;          /* right-align text inside meta block */
-  margin-left: 60px;          /* shift slightly left of center */
+  text-align: right;          /* align text right inside meta */
+  margin-left: 40px;          /* shift slightly left of center */
 }
 
 .header .title {
@@ -50,10 +49,11 @@ body {
   margin: 0;
 }
 
-.header-right {
-  flex: 1;                    /* fills remaining space to the right */
-  text-align: right;
+.supplier {
+  flex: 0 0 auto;            /* supplier takes only its content width */
+  text-align: right;          /* align text to right */
 }
+
 
 /* ---------------- Info Sections ---------------- */
 .info .meta {
